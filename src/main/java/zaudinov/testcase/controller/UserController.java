@@ -8,11 +8,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import zaudinov.testcase.domain.User;
+import zaudinov.testcase.exception.UserNotExistsException;
+import zaudinov.testcase.repository.projections.UserView;
 import zaudinov.testcase.service.ServService;
 import zaudinov.testcase.service.UserService;
 
@@ -40,6 +39,16 @@ public class UserController {
             return new ResponseEntity(headers, HttpStatus.FOUND) ;
         }
         return ResponseEntity.ok(userService.getAllUsers(pageable));
+    }
+
+    @GetMapping("filter/account/{account}")
+    public ResponseEntity<Page<UserView>> getUserByAccount(
+            @PathVariable String account,
+            @PageableDefault(size = 20, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+    ){
+        Page<UserView> users = userService.getByAccount(account, pageable);
+
+        return ResponseEntity.ok(users);
     }
 
 }

@@ -5,7 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import zaudinov.testcase.domain.User;
+import zaudinov.testcase.exception.UserNotExistsException;
 import zaudinov.testcase.repository.UserRepository;
+import zaudinov.testcase.repository.projections.UserView;
 
 @Service
 public class UserService {
@@ -21,5 +23,13 @@ public class UserService {
         Page<User> all = userRepository.findAll(pageable);
 
         return all;
+    }
+
+    public Page<UserView> getByAccount(String filter, Pageable pageable) {
+        Page<UserView> byAccountLike = userRepository.getByAccountLike(filter, pageable);
+        if(byAccountLike.getTotalElements() == 0){
+            throw new UserNotExistsException("There is no user with such account");
+        }
+        return byAccountLike;
     }
 }

@@ -8,9 +8,39 @@ INSERT INTO SERVICE (service_id, name, parent_id) VALUES
 (6, 'Детский сад', null),
 (7, 'Ясли', 6);
 
-INSERT INTO USR (USER_ID, FIO, ACCOUNT, SERVICE_ID) VALUES
-(1, 'Ivanov Petr Ivanovich', '1235213', 3),
-(2, 'Petrov Aleksey Sergeevich', '2235213', 2);
+INSERT INTO USR (USER_ID, ACCOUNT, FIO, SERVICE_ID) VALUES
+(1, '1235213', 'Ivanov Petr Ivanovich',  3),
+(2, '2235213', 'Petrov Aleksey Sergeevich', 2),
+(3, '10', 'user3', 6),
+(4, '11', 'user4', 8),
+(5, '12', 'user5', 1),
+(6, '13', 'user6', 1),
+(7, '14', 'user7', 1),
+(8, '15', 'user8', 4),
+(9, '16', 'user9', 5),
+(10, '17', 'user10', 8),
+(11, '18', 'user11', 3),
+(12, '19', 'user12', 6),
+(13, '20', 'user13', 8),
+(14, '21', 'user14', 3),
+(15, '22', 'user15', 4),
+(16, '23', 'user16', 2),
+(17, '24', 'user17', 4),
+(18, '25', 'user18', 6),
+(19, '26', 'user19', 4),
+(20, '27', 'user20', 1),
+(21, '28', 'user21', 5),
+(22, '29', 'user22', 5),
+(23, '30', 'user23', 8),
+(24, '31', 'user24', 7),
+(25, '32', 'user25', 3),
+(26, '33', 'user26', 3),
+(27, '34', 'user27', 7),
+(28, '35', 'user28', 7),
+(29, '36', 'user29', 1),
+(30, '37', 'user30', 2),
+(31, '38', 'user31', 8);
+
 
 
 

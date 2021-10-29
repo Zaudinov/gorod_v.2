@@ -1,7 +1,5 @@
 package zaudinov.testcase.domain;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
