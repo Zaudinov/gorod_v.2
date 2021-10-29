@@ -10,11 +10,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import zaudinov.testcase.domain.Serv;
+import zaudinov.testcase.domain.User;
 import zaudinov.testcase.repository.projections.UserView;
 import zaudinov.testcase.service.ServService;
 import zaudinov.testcase.service.UserService;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Set;
 
 @RestController
@@ -77,6 +81,22 @@ public class UserController {
 
         return ResponseEntity.ok(subscribers);
 
+    }
+
+    @PostMapping
+    public ResponseEntity<Long> createUser(@RequestBody User user) throws URISyntaxException {
+        Long createdUserId = userService.create(user);
+
+        if(createdUserId == null){
+            return ResponseEntity.notFound().build();
+        }
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdUserId)
+                .toUri();
+
+        return ResponseEntity.created(uri)
+                .body(createdUserId);
     }
 
 }

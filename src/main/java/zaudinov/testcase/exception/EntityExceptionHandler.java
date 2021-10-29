@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class EntityExceptionHandler {
 
     @ExceptionHandler(UserNotExistsException.class)
-    public ResponseEntity<Object> handleSubscriberNotFound(
+    public ResponseEntity<Object> handleUserNotFound(
             UserNotExistsException ex,
             WebRequest request){
         return new ResponseEntity<Object>(new ApiException(
@@ -29,5 +29,14 @@ public class EntityExceptionHandler {
                 ex.getMessage(),
                 HttpStatus.BAD_REQUEST,
                 LocalDateTime.now()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<Object> handleUserCreationException(
+            UserAlreadyExistsException ex,WebRequest request){
+        return new ResponseEntity<Object>(new ApiException(
+                ex.getMessage(),
+                HttpStatus.CONFLICT,
+                LocalDateTime.now()), HttpStatus.CONFLICT);
     }
 }
