@@ -3,7 +3,9 @@ package zaudinov.testcase.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zaudinov.testcase.domain.Serv;
+import zaudinov.testcase.exception.ServNotExistsException;
 import zaudinov.testcase.repository.ServRepository;
+import zaudinov.testcase.repository.projections.ServWithoutChildrenView;
 
 import java.util.Set;
 
@@ -19,5 +21,10 @@ public class ServService {
 
     public Set<Serv> getHierarchy() {
        return servRepository.findByParent(null);
+    }
+
+    public Serv findServiceById(Long id) {
+        Serv serv = servRepository.findById(id).orElseThrow(() -> new ServNotExistsException("there is no service with provided id"));
+        return serv;
     }
 }

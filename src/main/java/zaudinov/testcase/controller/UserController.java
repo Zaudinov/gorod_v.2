@@ -9,8 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import zaudinov.testcase.domain.User;
-import zaudinov.testcase.exception.UserNotExistsException;
+import zaudinov.testcase.domain.Serv;
 import zaudinov.testcase.repository.projections.UserView;
 import zaudinov.testcase.service.ServService;
 import zaudinov.testcase.service.UserService;
@@ -49,6 +48,18 @@ public class UserController {
         Page<UserView> users = userService.getByAccount(account, pageable);
 
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/service/{id}")
+    public ResponseEntity<Page<UserView>> getSubscriberByServiceId(
+            @PathVariable("id") Long id,
+            @PageableDefault(size = 20, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable){
+        Serv service = servService.findServiceById(id);
+
+        Page<UserView> subscribers = userService.getAllByService(service, pageable);
+
+        return ResponseEntity.ok(subscribers);
+
     }
 
 }

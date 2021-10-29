@@ -20,4 +20,14 @@ public class EntityExceptionHandler {
                 HttpStatus.BAD_REQUEST,
                 LocalDateTime.now()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ServNotExistsException.class)
+    public ResponseEntity<Object> handleServiceNotFound(
+            ServNotExistsException ex,
+            WebRequest request){
+        return new ResponseEntity<Object>(new ApiException(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST,
+                LocalDateTime.now()), HttpStatus.BAD_REQUEST);
+    }
 }
