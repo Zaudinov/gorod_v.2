@@ -10,6 +10,6 @@ import zaudinov.testcase.domain.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    @Query(value = "SELECT u FROM User u")
-    Page<User> getAll(Pageable pageable);
+//    @Query(value = "SELECT u FROM User u")
+    Page<User> findAll (Pageable pageable);
 }

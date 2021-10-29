@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<User>> getAllSubscribers(
+    public ResponseEntity<Page<User>> getAllUsers(
             @PageableDefault(size = 20, sort = {"account"}, direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam(name = "filter", required = false) String filter
     ){

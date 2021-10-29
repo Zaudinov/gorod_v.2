@@ -4,7 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "service")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "service_type", discriminatorType=DiscriminatorType.INTEGER)
+@DiscriminatorValue("null")
 public class Serv {
 
     @Id

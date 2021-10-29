@@ -5,6 +5,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "service")
+@DiscriminatorValue("2")
 public class ServHierarchy extends Serv{
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="parent_id", referencedColumnName="service_id")

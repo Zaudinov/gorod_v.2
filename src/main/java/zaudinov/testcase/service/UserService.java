@@ -18,6 +18,8 @@ public class UserService {
     }
 
     public Page<User> getAllUsers(Pageable pageable){
-        return userRepository.getAll(pageable);
+        Page<User> all = userRepository.findAll(pageable);
+
+        return all;
     }
 }
