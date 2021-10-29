@@ -8,11 +8,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import zaudinov.testcase.domain.Serv;
 import zaudinov.testcase.repository.projections.UserView;
 import zaudinov.testcase.service.ServService;
 import zaudinov.testcase.service.UserService;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
@@ -50,6 +53,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @Transactional
     @GetMapping("/service/{id}")
     public ResponseEntity<Page<UserView>> getSubscriberByServiceId(
             @PathVariable("id") Long id,
@@ -57,6 +61,19 @@ public class UserController {
         Serv service = servService.findServiceById(id);
 
         Page<UserView> subscribers = userService.getAllByService(service, pageable);
+
+        return ResponseEntity.ok(subscribers);
+
+    }
+
+    @Transactional
+    @GetMapping("/service/all/{id}")
+    public ResponseEntity<Page<UserView>> getSubscriberByServiceIdWithChildren(
+            @PathVariable("id") Long id,
+            @PageableDefault(size = 20, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable){
+        Set<Serv> services = servService.getServiceWithChildrenDeepSet(id);
+
+        Page<UserView> subscribers = userService.getAllByServicesIn(services, pageable);
 
         return ResponseEntity.ok(subscribers);
 

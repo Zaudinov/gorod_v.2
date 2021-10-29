@@ -9,6 +9,8 @@ import zaudinov.testcase.exception.UserNotExistsException;
 import zaudinov.testcase.repository.UserRepository;
 import zaudinov.testcase.repository.projections.UserView;
 
+import java.util.Set;
+
 @Service
 public class UserService {
 
@@ -40,4 +42,13 @@ public class UserService {
         }
         return users;
     }
+
+    public Page<UserView> getAllByServicesIn(Set<Serv> services, Pageable pageable) {
+        Page<UserView> users = userRepository.getAllByServiceIn(services, pageable);
+        if (users == null){
+            throw new UserNotExistsException("There are no users with provided service");
+        }
+        return users;
+    }
+
 }

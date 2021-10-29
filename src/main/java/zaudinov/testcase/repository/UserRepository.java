@@ -9,6 +9,8 @@ import zaudinov.testcase.domain.Serv;
 import zaudinov.testcase.domain.User;
 import zaudinov.testcase.repository.projections.UserView;
 
+import java.util.Set;
+
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
@@ -16,6 +18,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
     Page<UserView> getAll (Pageable pageable);
 
     Page<UserView> getAllByService(Serv s, Pageable pageable);
+
+    Page<UserView> getAllByServiceIn(Set<Serv> services, Pageable pageable);
 
     Page<UserView> getByAccountLike(String filter, Pageable pageable);
 }
