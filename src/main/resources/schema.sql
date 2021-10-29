@@ -1,8 +1,13 @@
 CREATE TABLE IF NOT EXISTS service(
     service_id BIGINT IDENTITY PRIMARY KEY,
     name VARCHAR(128) UNIQUE,
-    service_type INT,
     parent_id BIGINT foreign key references service(SERVICE_ID)
+);
+
+CREATE TABLE IF NOT EXISTS service_hierarchy(
+    child_id BIGINT PRIMARY KEY,
+    parent_id BIGINT,
+    FOREIGN KEY(child_id) REFERENCES service(service_id)
 );
 
 CREATE TABLE IF NOT EXISTS usr(
