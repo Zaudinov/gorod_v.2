@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import zaudinov.testcase.domain.User;
 import zaudinov.testcase.exception.UserNotExistsException;
 import zaudinov.testcase.repository.UserRepository;
 import zaudinov.testcase.repository.projections.UserView;
@@ -19,8 +18,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Page<User> getAllUsers(Pageable pageable){
-        Page<User> all = userRepository.findAll(pageable);
+    public Page<UserView> getAllUsers(Pageable pageable){
+        Page<UserView> all = userRepository.getAll(pageable);
 
         return all;
     }
