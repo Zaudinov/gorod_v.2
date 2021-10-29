@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS service(
     service_id BIGINT IDENTITY PRIMARY KEY,
-    name VARCHAR(128) UNIQUE
+    name VARCHAR(128) UNIQUE,
+    parent_id BIGINT foreign key references service(SERVICE_ID)
 );
 
 CREATE TABLE IF NOT EXISTS usr(

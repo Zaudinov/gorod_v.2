@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "service_hierarchy")
-@PrimaryKeyJoinColumn(name = "service_id")
+@Table(name = "service")
 public class ServHierarchy extends Serv{
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="parent_id", referencedColumnName="service_id")
@@ -13,4 +12,16 @@ public class ServHierarchy extends Serv{
 
     @Column(name="parent_id", nullable = true)
     private Integer parent;
+
+    public Set<Serv> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Serv> children) {
+        this.children = children;
+    }
+
+    public Integer getParent() {
+        return parent;
+    }
 }
