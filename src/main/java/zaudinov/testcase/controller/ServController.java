@@ -1,9 +1,6 @@
 package zaudinov.testcase.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zaudinov.testcase.domain.Serv;
@@ -29,14 +26,13 @@ public class ServController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteServiceById(
-            @PathVariable("id") Long id, @RequestParam(name = "force",defaultValue = "false") boolean force,
-            @PageableDefault(size = 20, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+            @PathVariable("id") Long id, @RequestParam(name = "force",defaultValue = "false") boolean force
     ){
         if(!force){
             servService.deleteServ(id);
         }
         else{
-            servService.deleteServForce(id, pageable);
+            servService.deleteServForce(id);
         }
         return ResponseEntity.ok().build();
     }

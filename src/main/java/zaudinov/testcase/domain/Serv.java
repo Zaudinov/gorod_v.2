@@ -15,7 +15,7 @@ public class Serv {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name="parent_id", referencedColumnName="service_id")
     private Set<Serv> children;
 

@@ -1,7 +1,6 @@
 package zaudinov.testcase.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zaudinov.testcase.domain.Serv;
@@ -57,19 +56,19 @@ public class ServService {
 
     @Transactional
     public void deleteServ(Long id) {
-        //check that provided service is a valid service
+        //check that provided service id represent a valid service
         Serv servToBeDeleted = servRepository.findById(id)
                 .orElseThrow(() -> new ServNotExistsException("there is no service with provided id"));
 
         //if service has at least one child, it can't be deleted
-        if(servToBeDeleted.getChildren() != null){
+        if(servToBeDeleted.getChildren().size() != 0){
             throw new CantDeleteServiceException("Can't delete the service, " +
                     "it has one or more child service");
         }
 
 
         //if service has at least one subscriber to it, it can't be deleted
-        User user = userRepository.findTop1ByServ(servToBeDeleted);
+        User user = userRepository.findTop1ByService(servToBeDeleted);
 
         if(user != null){
             throw new CantDeleteServiceException ("Can't delete the service, " +
@@ -83,7 +82,13 @@ public class ServService {
 
     }
 
-    public void deleteServForce(Long id, Pageable pageable) {
+    @Transactional
+    public void deleteServForce(Long id) {
+        //check that provided service id represent a valid service
+        Serv servToBeDeleted = servRepository.findById(id)
+                .orElseThrow(() -> new ServNotExistsException("there is no service with provided id"));
+
+        servRepository.delete(servToBeDeleted);
 
     }
 }

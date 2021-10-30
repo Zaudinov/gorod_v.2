@@ -9,7 +9,6 @@ import zaudinov.testcase.domain.Serv;
 import zaudinov.testcase.domain.User;
 import zaudinov.testcase.repository.projection.UserView;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Repository
@@ -24,5 +23,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Page<UserView> getByAccountLike(String filter, Pageable pageable);
 
-    User findTop1ByServ(Serv s);
+    User findTop1ByService(Serv s);
 }
