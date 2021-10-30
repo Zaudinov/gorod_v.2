@@ -1,4 +1,4 @@
-package zaudinov.testcase.repository.projections;
+package zaudinov.testcase.repository.projection;
 
 public interface UserView {
     Long getId();

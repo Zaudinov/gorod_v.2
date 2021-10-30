@@ -39,4 +39,13 @@ public class EntityExceptionHandler {
                 HttpStatus.CONFLICT,
                 LocalDateTime.now()), HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(CantDeleteServiceException.class)
+    public ResponseEntity<Object> handleServHasChildrenException(
+            CantDeleteServiceException ex, WebRequest request){
+            return new ResponseEntity<Object>(new ApiException(
+                    ex.getMessage(),
+                    HttpStatus.CONFLICT,
+                    LocalDateTime.now()), HttpStatus.CONFLICT);
+    }
 }

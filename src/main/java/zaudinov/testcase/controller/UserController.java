@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import zaudinov.testcase.domain.Serv;
 import zaudinov.testcase.domain.User;
-import zaudinov.testcase.repository.projections.UserView;
+import zaudinov.testcase.repository.projection.UserView;
 import zaudinov.testcase.service.ServService;
 import zaudinov.testcase.service.UserService;
 

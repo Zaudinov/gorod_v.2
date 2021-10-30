@@ -7,8 +7,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import zaudinov.testcase.domain.Serv;
 import zaudinov.testcase.domain.User;
-import zaudinov.testcase.repository.projections.UserView;
+import zaudinov.testcase.repository.projection.UserView;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Repository
@@ -22,4 +23,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     Page<UserView> getAllByServiceIn(Set<Serv> services, Pageable pageable);
 
     Page<UserView> getByAccountLike(String filter, Pageable pageable);
+
+    User findTop1ByServ(Serv s);
 }

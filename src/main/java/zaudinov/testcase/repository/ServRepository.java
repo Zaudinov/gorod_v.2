@@ -12,4 +12,5 @@ public interface ServRepository extends CrudRepository<Serv, Long> {
     Set<Serv> findByParent(Long parentId);
 
     Optional<Serv> findById(Long id);
+
 }

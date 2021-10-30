@@ -12,7 +12,7 @@ import zaudinov.testcase.exception.UserAlreadyExistsException;
 import zaudinov.testcase.exception.UserNotExistsException;
 import zaudinov.testcase.repository.ServRepository;
 import zaudinov.testcase.repository.UserRepository;
-import zaudinov.testcase.repository.projections.UserView;
+import zaudinov.testcase.repository.projection.UserView;
 
 import java.util.Set;
 
