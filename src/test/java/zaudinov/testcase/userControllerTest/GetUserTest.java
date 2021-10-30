@@ -1,4 +1,4 @@
-package zaudinov.testcase;
+package zaudinov.testcase.userControllerTest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

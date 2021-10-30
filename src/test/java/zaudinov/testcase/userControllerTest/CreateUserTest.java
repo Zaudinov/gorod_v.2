@@ -1,4 +1,4 @@
-package zaudinov.testcase;
+package zaudinov.testcase.userControllerTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
