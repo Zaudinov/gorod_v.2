@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import zaudinov.testcase.domain.Serv;
 import zaudinov.testcase.domain.User;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -117,6 +118,12 @@ public class CreateUserTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location", "http://localhost/user/filter/account/5"));
+
+        mockMvc.perform(get("/user"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath(".totalElements").value(5));
     }
 
     public User getTestUserWithoutServices(){
