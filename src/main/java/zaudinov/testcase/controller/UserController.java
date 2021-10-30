@@ -47,6 +47,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers(pageable));
     }
 
+
     @GetMapping("filter/account/{account}")
     public ResponseEntity<Page<UserView>> getUserByAccount(
             @PathVariable String account,
@@ -59,7 +60,7 @@ public class UserController {
 
     @Transactional
     @GetMapping("/service/{id}")
-    public ResponseEntity<Page<UserView>> getSubscriberByServiceId(
+    public ResponseEntity<Page<UserView>> getUserByServiceId(
             @PathVariable("id") Long id,
             @PageableDefault(size = 20, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable){
         Serv service = servService.findServiceById(id);
@@ -72,7 +73,7 @@ public class UserController {
 
     @Transactional
     @GetMapping("/service/all/{id}")
-    public ResponseEntity<Page<UserView>> getSubscriberByServiceIdWithChildren(
+    public ResponseEntity<Page<UserView>> getUserByServiceIdWithChildren(
             @PathVariable("id") Long id,
             @PageableDefault(size = 20, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable){
         Set<Serv> services = servService.getServiceWithChildrenDeepSet(id);
@@ -91,7 +92,7 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
+                .path("/filter/account/{account}")
                 .buildAndExpand(createdUserId)
                 .toUri();
 

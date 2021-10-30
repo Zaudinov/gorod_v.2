@@ -65,7 +65,7 @@ public class UserService {
         //Check if there is existing subscriber with provided id
         User userInDb = null;
         if(CreatedUserId != null){
-            userInDb = userRepository.findById(CreatedUserId).get();
+            userInDb = userRepository.findById(CreatedUserId).orElse(null);
         }
         if(userInDb != null){
             throw new UserAlreadyExistsException("There is an existing user with provided id");
@@ -78,7 +78,7 @@ public class UserService {
         }
 
         Serv servFromDB = servRepository.findById(createdUserServ.getId())
-                .orElseThrow(() -> new ServNotExistsException("Invalid service is provided"));
+                .orElseThrow(() -> new ServNotExistsException("invalid service is provided"));
 
         // Check that provided service has same id and name as service from DB
         if(!createdUserServ.equals(servFromDB)){
