@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource("/application-test.properties")
 @Sql(value = {"/add_data_before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/add_data_after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class UserControllerTest {
+public class GetUserTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -55,5 +55,26 @@ public class UserControllerTest {
 				.andExpect(jsonPath(".totalElements").value(2));
 	}
 
+	@Test
+	public void getUserByServiceTest() throws Exception{
+		mockMvc.perform(get("/user/service/1"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().contentType("application/json"))
+				.andExpect(jsonPath(".account").value("1234526"))
+				.andExpect(jsonPath(".totalElements").value(1));
+	}
+
+	@Test
+	public void getUserByServiceWithChildrenTest() throws Exception{
+		mockMvc.perform(get("/user/service/all/1"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().contentType("application/json"))
+				.andExpect(jsonPath("content[0].account").value("1234526"))
+				.andExpect(jsonPath("content[1].account").value("1234514"))
+				.andExpect(jsonPath("content[2].account").value("1234513"))
+				.andExpect(jsonPath(".totalElements").value(3));
+	}
 
 }
